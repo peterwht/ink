@@ -63,6 +63,28 @@ jobs:
       - id: set_image
         run: echo "IMAGE=${{ env.IMAGE }}" >> $GITHUB_OUTPUT
 
+  spellcheck:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    needs: [ set-image ]
+    container:
+      image: ${{ needs.set-image.outputs.IMAGE }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+
+      - name: Rust Info
+        uses: ./.github/rust-info
+
+      - name: Check Spelling
+        run: |
+          cargo spellcheck check -v --cfg=.config/cargo_spellcheck.toml --checkers hunspell --code 1 -- recursive .
+          cargo spellcheck check -v --cfg=.config/cargo_spellcheck.toml --checkers hunspell --code 1 -- recursive ./integration-tests/*
+
   check:
       runs-on: ubuntu-latest
       defaults:
