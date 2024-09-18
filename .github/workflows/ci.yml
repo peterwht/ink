@@ -626,7 +626,7 @@ jobs:
           scripts/for_all_contracts_exec.sh --path integration-tests --ignore public/custom-allocator --ignore public/call-runtime --ignore public/contract-xcm \
             -- cargo build --manifest-path {} --no-default-features --target $RISCV_TARGET -Zbuild-std="core,alloc"
       - name: Upload RISCV build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: riscv-build-artifacts
           path: target/$RISCV_TARGET/release
