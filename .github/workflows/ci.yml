@@ -631,7 +631,7 @@ jobs:
           #   - custom_allocator
           # Pulls in sp-std which needlessly requires atomic pointers (TODO: Fix sp-std and enable this example)
           #   - call-runtime
-            cargo contract build --manifest-path=integration-tests/flipper --release --target=riscv
+            cargo contract build --manifest-path=integration-tests/flipper/Cargo.toml --release --target=riscv
           
 
       - name: Upload RISCV build artifacts
