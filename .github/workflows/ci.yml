@@ -615,7 +615,7 @@ jobs:
           git clone https://github.com/use-ink/cargo-contract.git
           cd cargo-contract
           git checkout at/riscv
-          cargo install --path .
+          cargo install --force --locked --path ./crates/cargo-contract/
           cd ..
 
       - name: Build Contract RISCV Examples
